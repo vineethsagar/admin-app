@@ -1,0 +1,30 @@
+# [START app_yaml]
+runtime: nodejs18
+service: react-github # prefix/subdomain of the bucket specific to project and environment
+
+handlers:
+  - url: /static/js/(.*)
+    static_files: dist/static/js/\1
+    upload: dist/static/js/(.*)
+    secure: always
+  - url: /static/css/(.*)
+    static_files: dist/static/css/\1
+    upload: dist/static/css/(.*)
+    secure: always
+  - url: /static/media/(.*)
+    static_files: dist/static/media/\1
+    upload: dist/static/media/(.*)
+    secure: always
+  - url: /(.*\.(json|ico|png|jpg|svg))$
+    static_files: dist/\1
+    upload: dist/.*\.(json|ico|png|jpg|svg)$
+    secure: always
+  - url: /
+    static_files: dist/index.html
+    upload: dist/index.html
+    secure: always
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+    secure: always
+# [END app_yaml]
